@@ -1,23 +1,40 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<title>Meater</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <title>Meater</title>
+
 </head>
 
 <body class="p-3 mb-2 bg-light text-dark">
 <div class="p-3 mb-2 bg-secondary text-white"><form method="post" action="/" class="">
-    <input type="text" name="text" placeholder="Enter the message">
-    <input type="text" name="tag" placeholder="Tag">
-
+    <div class="row">
+        <div class="col">
+    <input class="form-control" type="text" name="text" placeholder="Enter the message">
+        </div>
+        <div class="col">
+    <input class="form-control" type="text" name="tag" placeholder="Tag">
+        </div>
+        <div class="col">
    <button type="submit" class="btn btn-primary">Add </button>
-
+        </div>
+    </div>
 </form></div>
 
-<div ><h3>Список</h3></div>
+<div ><h3>Список  <i class='fas fa-comments' style='font-size:36px'></i></h3>
+
+
+</div>
 
 <form method="post" action="filter">
-    <input type="text" name="filter">
+    <div class="row">
+        <div class="col">
+    <input class="form-control" type="text" name="filter">
+        </div>
+        <div class="col">
     <button type="submit" class="btn btn-primary">FindByTag</button>
+        </div>
+    </div>
 </form>
 
 <div class="p-3 mb-2 bg-secondary text-white">
