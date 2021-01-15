@@ -7,7 +7,18 @@
 </head>
 
 <body class="p-3 mb-2 bg-light text-dark">
+<div>
+
+    <form action="/logout" method="post">
+        <input type="submit" value="Sign Out"/>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    </form>
+</div>
+
+
+
 <div class="p-3 mb-2 bg-secondary text-white"><form method="post" action="/" class="">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <div class="row">
         <div class="col">
     <input class="form-control" type="text" name="text" placeholder="Enter the message">
@@ -27,6 +38,7 @@
 </div>
 
 <form method="post" action="filter">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <div class="row">
         <div class="col">
     <input class="form-control" type="text" name="filter">

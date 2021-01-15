@@ -1,13 +1,11 @@
 package com.deo.meater.controller;
 
-import com.deo.meater.controller.repos.MessageRepository;
+import com.deo.meater.repos.MessageRepository;
 import com.deo.meater.entity.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,14 +18,14 @@ public class GreetingsController {
 
 
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="Bridgeboy") String name, Map<String, Object> model) {
-        model.put("name", name);
+    @GetMapping("/")
+    public String greeting(Map<String, Object> model) {
+
         return "greeting";
     }
 
 
-    @GetMapping()
+    @GetMapping("/main")
       public String main(Map<String, Object> model)  {
 
         Iterable<Message> messages = messageRepository.findAll();
@@ -37,7 +35,7 @@ public class GreetingsController {
         return "main";
     }
 
-    @PostMapping()
+    @PostMapping("/main")
     public String add(@RequestParam String text,@RequestParam String tag,  Map<String, Object> model){
 
         Message message = new Message(text,tag);

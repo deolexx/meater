@@ -1,4 +1,4 @@
-package com.deo.meater.controller.repos;
+package com.deo.meater.repos;
 
 import com.deo.meater.entity.Message;
 
