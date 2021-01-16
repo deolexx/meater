@@ -1,15 +1,18 @@
 package com.deo.meater.controller;
 
+import com.deo.meater.entity.User;
 import com.deo.meater.repos.MessageRepository;
 import com.deo.meater.entity.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @Controller
-public class GreetingsController {
+public class MainController {
 
     @Autowired
    private MessageRepository messageRepository;
@@ -36,9 +39,12 @@ public class GreetingsController {
     }
 
     @PostMapping("/main")
-    public String add(@RequestParam String text,@RequestParam String tag,  Map<String, Object> model){
+    public String add(
+            @AuthenticationPrincipal User user,
+            @RequestParam String text,
+            @RequestParam String tag,  Map<String, Object> model){
 
-        Message message = new Message(text,tag);
+        Message message = new Message(text,tag,user);
         messageRepository.save(message);
 
         Iterable<Message> messages = messageRepository.findAll();
