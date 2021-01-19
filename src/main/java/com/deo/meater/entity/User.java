@@ -23,6 +23,12 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
 
+public boolean isAdmin(){
+
+    return roles.contains(Role.ADMIN);
+}
+
+
     public Long getId() {
         return id;
     }
