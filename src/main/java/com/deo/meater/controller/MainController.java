@@ -14,6 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -58,6 +62,10 @@ public class MainController {
 
         Message message = new Message(text,tag,user);
 
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String strDate = dateFormat.format(date);
+        message.setDate(strDate);
         if(file != null && !file.getOriginalFilename().isEmpty()){
             File uploadDir = new File(uploadPath);
             if(!uploadDir.exists()){
@@ -75,8 +83,16 @@ public class MainController {
 
         model.put("messages",messages);
 
-        return "main";
+        return "redirect:/main";
     }
+
+    @PostMapping("/delete")
+    public String deleteMessage(@RequestParam("messageId") Integer theId){
+        messageRepository.deleteById(theId);
+        return "redirect:/main";
+    }
+
+
 
 
 

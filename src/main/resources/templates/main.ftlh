@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
-
+<#include "parts/security.ftlh">
 <@c.page>
             <div>
             <form class="row g-2 mb-3" method="get" action="/main" >
@@ -46,7 +46,7 @@
 
                 <div class=" font-monospace text-muted">
                     <ul class="list-inline">
-                        <li class="list-inline-item ">#Tag: </li>
+                        <li class="list-inline-item ">#Tag:</li>
                         <li class="list-inline-item">${message.tag}</li>
                     </ul>
 
@@ -55,7 +55,17 @@
 
         </div>
         <div class="card-footer">
+
             <small class="text-muted">${message.authorName}</small>
+
+            <small class="text-muted">${message.getDate()?ifExists}</small>
+            <#if message.authorName=name>
+            <form action="/delete" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <input type="hidden" name="messageId" value="${message.id}">
+                <button class="btn btn-secondary btn-sm" type="submit">Delete</button>
+            </form>
+            </#if>
         </div>
 
 
