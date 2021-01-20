@@ -4,7 +4,7 @@
             <div>
             <form class="row g-2 mb-3" method="get" action="/main" >
 
-                <div class="col-auto"><input type="text" name="filter" class="form-control" value="${filter?ifExists}"
+                <div class="col-auto"><input type="text" name="filter" class="form-control" value="${filter!}"
                             placeholder="Search by tag"></div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary ml-2">Search</button>
@@ -58,12 +58,12 @@
 
             <small class="text-muted">${message.authorName}</small>
 
-            <small class="text-muted">${message.getDate()?ifExists}</small>
+            <small class="text-muted">${message.getDate()!}</small>
             <#if message.authorName=name>
             <form action="/delete" method="post">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <input type="hidden" name="messageId" value="${message.id}">
-                <button class="btn btn-secondary btn-sm" type="submit">Delete</button>
+                <button class="btn btn-secondary btn-sm" type="submit" onclick="if (!confirm('Delete this message?')) { return false }">Delete</button>
             </form>
             </#if>
         </div>
