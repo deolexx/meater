@@ -1,5 +1,7 @@
 <#include "security.ftlh">
+<#import "login.ftlh" as l>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Meater</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -21,9 +23,16 @@
                     </li>
                 </#if>
             </ul>
+
+                <div class="navbar-text mr-6">${name}</div>
+            <div class="">
+            <@l.logout />
+            </div>
+
         </div>
-        <div class="navbar-text">${name}</div>
     </div>
+
+
 </nav>
 
 

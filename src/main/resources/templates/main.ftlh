@@ -1,40 +1,72 @@
 <#import "parts/common.ftlh" as c>
-<#import "parts/login.ftlh" as l>
+
 <@c.page>
-<div>
-<@l.logout />
-    <span><a href="/user">User List</a> </span>
+            <div>
+            <form class="row g-2 mb-3" method="get" action="/main" >
+
+                <div class="col-auto"><input type="text" name="filter" class="form-control" value="${filter?ifExists}"
+                            placeholder="Search by tag"></div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary ml-2">Search</button>
+                </div>
+            </form>
+            </div>
+
+    <a class="btn btn-primary mb-3" data-bs-toggle="collapse" href="#collapseForm" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new message
+    </a>
+<div class="collapse" id="collapseForm">
+    <div class="input-group mb-3">
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" class="form-control mb-2" name="text" placeholder="Введите сообщение"/>
+            <input type="text" class="form-control mb-2" name="tag" placeholder="Тэг">
+
+            <div class="input-group mb-2">
+                <input type="file" name="file" class="form-control" id="inputGroupFile04"  aria-label="Upload">
+
+            </div>
+
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <button class=" btn btn-primary " type="submit">Добавить</button>
+        </form>
+    </div>
 </div>
-<div>
-    <form method="post" enctype="multipart/form-data">
-        <input type="text" name="text" placeholder="Введите сообщение" />
-        <input type="text" name="tag" placeholder="Тэг">
-        <input type="file" name="file">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        <button type="submit">Добавить</button>
-    </form>
-</div>
-<div>Список сообщений</div>
-<form method="get" action="/main">
-    <input type="text" name="filter" value="${filter?if_exists}">
-    <button type="submit">Найти</button>
-</form>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+
 <#list messages as message>
-    <div>
-        <b>${message.id}</b>
-        <span>${message.text}</span>
-        <i>${message.tag}</i>
-        <strong>${message.authorName}</strong>
+    <div class="col mb-4">
+    <div class="card h-100">
         <div>
             <#if  message.filename??>
-                <img src="/img/${message.filename}" alt="">
+                <img src="/img/${message.filename}" class="card-img-top" alt="">
             </#if>
+        </div>
+        <div class="card-body">
+
+                <div class=" font-monospace text-muted">
+                    <ul class="list-inline">
+                        <li class="list-inline-item ">#Tag: </li>
+                        <li class="list-inline-item">${message.tag}</li>
+                    </ul>
+
+                </div>
+            <div>${message.text}</div>
 
         </div>
-    </div>
+        <div class="card-footer">
+            <small class="text-muted">${message.authorName}</small>
+        </div>
 
+
+    </div>
+    </div>
 <#else>
-    No message
+    <div class="alert alert-danger" role="alert">
+    No messages to show
+        </div>
 
 </#list>
+
+</div>
 </@c.page>
