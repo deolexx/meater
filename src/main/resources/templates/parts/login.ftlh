@@ -24,7 +24,6 @@
                 <input class="form-control" type="email"
                        id="InputEmail"
                        name="email" placeholder="google@com"/>
-                <div id="emailHelp" class="form-text "></div>
             </div>
         </div>
         </#if>

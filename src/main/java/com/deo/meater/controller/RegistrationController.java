@@ -36,7 +36,7 @@ private UserService userService;
     }
 
 
-    @GetMapping("/activate{code}")
+    @GetMapping("/activate/{code}")
 public String activate(Model model, @PathVariable String code){
     boolean isActivated = userService.activateUser(code);
     if(isActivated){

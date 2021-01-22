@@ -3,13 +3,11 @@ package com.deo.meater.service;
 import com.deo.meater.entity.Role;
 import com.deo.meater.entity.User;
 import com.deo.meater.repos.UserRepo;
-import freemarker.template.utility.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
@@ -22,7 +20,7 @@ public class UserService implements UserDetailsService {
     private  UserRepo userRepo;
 
     @Autowired
-     private MailService mailService;
+     private MailSender mailService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,10 +44,10 @@ public class UserService implements UserDetailsService {
 
         userRepo.save(user);
 
-        if(ObjectUtils.isEmpty(user.getEmail()))
+        if(!StringUtils.isEmpty(user.getEmail()))
         {
-            String mesage = String.format("Hello, %s! \n"+"Welcome to Meater. Please, visit next link: http://localhost:8080/acttivate/%s",user.getUsername(),user.getActivationCode());
-mailService.send(user.getEmail(),"Activation code",mesage);
+            String message = String.format("Hello, %s! \n"+"Welcome to Meater. Please, visit next link: http://localhost:8080/activate/%s",user.getUsername(),user.getActivationCode());
+mailService.send(user.getEmail(),"Activation code",message);
 
 
         }
