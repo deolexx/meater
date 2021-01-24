@@ -62,8 +62,8 @@ public class Message {
         this.author = author;
     }
 
-    public String getAuthorName(){
-        return author!=null ? author.getUsername() : "<none>";
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "<none>";
 
     }
 

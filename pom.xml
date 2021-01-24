@@ -31,9 +31,8 @@
             <version>42.2.18.jre7</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.flyway</groupId>
+            <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>2.3.1</version>
         </dependency>
         <!--Template engine-->
         <dependency>
