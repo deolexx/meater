@@ -18,14 +18,22 @@
 <div class="collapse" id="collapseForm">
     <div class="input-group mb-3">
         <form method="post" enctype="multipart/form-data">
-            <input type="text" class="form-control mb-2" name="text" placeholder="Введите сообщение"/>
-            <input type="text" class="form-control mb-2" name="tag" placeholder="Тэг">
+            <!--Message input field-->
+            <input type="text" class="form-control ${(textError??)?string('is-invalid','')}  mb-2"
+                   value="<#if message??>${message.text}</#if>" name="text" placeholder="Введите сообщение"/>
+            <#if textError??>
+                <div class="invalid-feedback">
+                    ${textError}
+</div>
 
+            </#if>
+            <!--Tag input field-->
+            <input type="text" class="form-control mb-2" name="tag" placeholder="Тэг">
+            <!--File input field-->
             <div class="input-group mb-2">
                 <input type="file" name="file" class="form-control" id="inputGroupFile04"  aria-label="Upload">
-
             </div>
-
+            <!--security token field-->
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <button class=" btn btn-primary " type="submit">Добавить</button>
         </form>
