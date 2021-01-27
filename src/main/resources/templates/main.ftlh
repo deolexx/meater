@@ -15,7 +15,7 @@
     <a class="btn btn-primary mb-3" data-bs-toggle="collapse" href="#collapseForm" role="button" aria-expanded="false" aria-controls="collapseExample">
         Add new message
     </a>
-<div class="collapse" id="collapseForm">
+<div class="collapse <#if message??>show</#if>" id="collapseForm">
     <div class="input-group mb-3">
         <form method="post" enctype="multipart/form-data">
             <!--Message input field-->
@@ -28,7 +28,13 @@
 
             </#if>
             <!--Tag input field-->
-            <input type="text" class="form-control mb-2" name="tag" placeholder="Тэг">
+            <input type="text" class="form-control mb-2"
+                   value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Тэг">
+            <#if textError??>
+                <div class="invalid-feedback">
+                    ${tagError}
+                </div>
+            </#if>
             <!--File input field-->
             <div class="input-group mb-2">
                 <input type="file" name="file" class="form-control" id="inputGroupFile04"  aria-label="Upload">
