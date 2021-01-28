@@ -21,9 +21,7 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Password cannot be empty")
     private String password;
-     @Transient
-    @NotBlank(message = "Password confirmation cannot be empty")
-    private String password2;
+
 
     private boolean active;
     @Email(message = "Email is not correct")
@@ -33,17 +31,16 @@ public class User implements UserDetails {
     private String activationCode;
 
 
-
-@ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
-@CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
-@Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
 
-public boolean isAdmin(){
+    public boolean isAdmin() {
 
-    return roles.contains(Role.ADMIN);
-}
+        return roles.contains(Role.ADMIN);
+    }
 
     public String getEmail() {
         return email;
@@ -53,13 +50,6 @@ public boolean isAdmin(){
         this.email = email;
     }
 
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
 
     public String getActivationCode() {
         return activationCode;

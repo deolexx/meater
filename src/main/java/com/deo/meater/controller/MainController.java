@@ -96,7 +96,7 @@ public class MainController {
 
         model.addAttribute("messages",messages);
 
-        return "redirect:/main";
+        return "main";
     }
 
 
