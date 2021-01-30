@@ -1,7 +1,6 @@
 package com.deo.meater.repos;
 
 import com.deo.meater.entity.Message;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

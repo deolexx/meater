@@ -38,26 +38,26 @@ public class UserController {
             @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user) {
-      userService.saveUser(user, username, form);
+        userService.saveUser(user, username, form);
 
         return "redirect:/user";
     }
 
 
-
     @GetMapping("profile")
-    public String userProfile(Model model, @AuthenticationPrincipal User user){
+    public String userProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
-      return "profile";
+        return "profile";
     }
+
     @PostMapping("profile")
     public String updateProfile(@AuthenticationPrincipal User user,
                                 @RequestParam String password,
-                                @RequestParam String email){
+                                @RequestParam String email) {
 
 
-        userService.updateProfile(user,password,email);
+        userService.updateProfile(user, password, email);
         return "redirect:/user/profile";
     }
 

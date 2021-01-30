@@ -53,13 +53,13 @@ public class UserService implements UserDetailsService {
 
     private void sendMessage(User user) {
         if (!StringUtils.isEmpty(user.getEmail())) {
-             String message = String.format("Hello, %s! \n" + "Welcome to Meater. Please, visit next link: http://localhost:8080/activate/%s",
-                     user.getUsername(),
-                     user.getActivationCode());
-             mailService.send(user.getEmail(), "Activation code", message);
+            String message = String.format("Hello, %s! \n" + "Welcome to Meater. Please, visit next link: http://localhost:8080/activate/%s",
+                    user.getUsername(),
+                    user.getActivationCode());
+            mailService.send(user.getEmail(), "Activation code", message);
 
 
-         }
+        }
     }
 
     public boolean activateUser(String code) {

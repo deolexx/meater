@@ -28,11 +28,10 @@ import java.util.UUID;
 public class MainController {
 
     @Autowired
-   private MessageRepository messageRepository;
+    private MessageRepository messageRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
-
 
 
     @GetMapping("/")
@@ -43,26 +42,28 @@ public class MainController {
 
 
     @GetMapping("/main")
-      public String main(@RequestParam(required = false, defaultValue = "")String filter, Model model)  {
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
 
         Iterable<Message> messages = messageRepository.findAll();
 
-        if(filter !=null &&!filter.isEmpty()) {
+        if (filter != null && !filter.isEmpty()) {
             messages = messageRepository.findByTag(filter);
-        }else {messages = messageRepository.findAll();}
+        } else {
+            messages = messageRepository.findAll();
+        }
 
-        model.addAttribute("messages",messages);
-        model.addAttribute("filter",filter);
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
         return "main";
     }
 
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
-          @Valid Message message,
+            @Valid Message message,
             BindingResult bindingResult,
             Model model,
-    @RequestParam("file") MultipartFile file) throws IOException {
+            @RequestParam("file") MultipartFile file) throws IOException {
 
         message.setAuthor(user);
 
@@ -76,8 +77,7 @@ public class MainController {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("message", message);
-        }
-        else {
+        } else {
             if (file != null && !file.getOriginalFilename().isEmpty()) {
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
@@ -94,22 +94,17 @@ public class MainController {
         }
         Iterable<Message> messages = messageRepository.findAll();
 
-        model.addAttribute("messages",messages);
+        model.addAttribute("messages", messages);
 
         return "main";
     }
 
 
-
     @PostMapping("/delete")
-    public String deleteMessage(@RequestParam("messageId") Integer theId){
+    public String deleteMessage(@RequestParam("messageId") Integer theId) {
         messageRepository.deleteById(theId);
         return "redirect:/main";
     }
-
-
-
-
 
 
 }

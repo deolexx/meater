@@ -13,7 +13,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank(message="Message cannot be empty")
+    @NotBlank(message = "Message cannot be empty")
     @Length(max = 2048, message = "Message too long")
     private String text;
     @Length(max = 255, message = "Message too long")
