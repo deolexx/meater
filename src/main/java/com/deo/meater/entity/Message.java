@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Message {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -43,14 +42,12 @@ public class Message {
 
     private String filename;
 
-
     public Message() {
     }
 
     public Message(String text, String tag) {
         this.text = text;
         this.tag = tag;
-
     }
 
     public Message(String text, String tag, User author) {
