@@ -9,7 +9,7 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
 
-    public List<Message> findByTag(String tag);
+     List<Message> findByTag(String tag);
 
 
 }

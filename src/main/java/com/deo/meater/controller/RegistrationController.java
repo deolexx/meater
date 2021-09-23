@@ -23,7 +23,6 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration() {
-
         return "registration";
     }
 
@@ -33,29 +32,24 @@ public class RegistrationController {
             @Valid User user,
             BindingResult bindingResult,
             Model model) {
-        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
-        if (isConfirmEmpty) {
+        boolean isConfitmEmpty = StringUtils.isEmpty(passwordConfirm);
+        if (isConfitmEmpty) {
             model.addAttribute("password2Error", "Password confirmation cannot be empty");
+
         }
-
-
         if (user.getPassword() != null && !user.getPassword().equals(passwordConfirm)) {
             model.addAttribute("passwordError", "Passwords are different");
             return "registration";
         }
-
-        if (isConfirmEmpty || bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errors);
             return "registration";
         }
-
         if (!userService.addUser(user)) {
             model.addAttribute("usernameError", "User exists!");
             return "registration";
         }
-
-
         return "redirect:/login";
     }
 
@@ -65,7 +59,12 @@ public class RegistrationController {
         boolean isActivated = userService.activateUser(code);
         if (isActivated) {
             model.addAttribute("message", "User successfully activated");
-        } else model.addAttribute("message", "Activation code is not found");
+            model.addAttribute("messageType", "success");
+
+        } else {
+            model.addAttribute("message", "Activation code is not found");
+            model.addAttribute("messageType", "danger");
+        }
         return "login";
     }
 
